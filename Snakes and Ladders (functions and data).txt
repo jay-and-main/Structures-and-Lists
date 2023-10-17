@@ -1,0 +1,18 @@
+Snakes and Ladders 
+
+Elements in the game:
+Board  (doubly linked list)
+Players (array of pointers)
+Dice (int)
+
+Functions:
+- Create board (initialise the board in the terminal and reset the pawns)
+- roll dice (if 6)
+- Enter die played irl
+- move player
+- if snake
+- if ladder
+- who's leading
+- who won (if 100)
+- winner list
+- leaderboard with rounds
