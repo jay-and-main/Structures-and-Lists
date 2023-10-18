@@ -15,6 +15,7 @@ NODE* createNode(int data){
     return newNode;
 }
 
+//  function to create the board
 NODE* createTable(NODE* head){
     int i;
     NODE* p=head;
@@ -26,6 +27,13 @@ NODE* createTable(NODE* head){
     }
     return head;
 }
+
+// each player is a pointer to the head of the board (ie. pointing to the position 1)
+NODE* createPlayer(NODE* head){
+    NODE* player = head;
+    return player;
+}
+
 
 void displayBoard(NODE* head){
     printf("\t\t**********SNAKE AND LADDER GAME**********\n\n");
@@ -41,6 +49,8 @@ void displayBoard(NODE* head){
     }
 }
 
+// function for rolling the die
+// returns a random number between 1 and 6
 int rd(){
     int rem;
     do {
@@ -54,6 +64,26 @@ int main(){
     head=createTable(head);
     char ch;
     int rem;
+
+    // making an array of pointers to represent the players
+    // assuming max no of players is 10
+
+    NODE* players[10];
+    int no_of_players;
+
+    // input the number of players
+    do {
+        printf("Enter the number of players (max no. of players is 10): ");
+        scanf("%d",&no_of_players);
+    } while (no_of_players>10);
+
+    // add the players to the players array
+    for (int k=0; k<no_of_players; k++){
+        players[k] = createPlayer(head);
+    }
+
+    // assume the index of the player in the players array is the player id
+
     while(1){
         rem = rd();
         printf("Press enter to roll the dice\n");
