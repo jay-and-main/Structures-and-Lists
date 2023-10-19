@@ -30,6 +30,9 @@ NODE* createTable(NODE* head){
 
 // each player is a pointer to the head of the board (ie. pointing to the position 1)
 NODE* createPlayer(NODE* head){
+    while(head->rlink!=NULL){
+        head = head->rlink;
+    }
     NODE* player = head;
     return player;
 }
@@ -78,8 +81,8 @@ void movePlayer(NODE** player, int steps) {
 
     // Move the player forward by 'steps' squares
     for (int i = 0; i < steps; i++) {
-        if (currentSquare->rlink != NULL) {
-            currentSquare = currentSquare->rlink;
+        if (currentSquare->llink != NULL) {
+            currentSquare = currentSquare->llink;
         } else {
             // The player has reached the end of the board
             break;
@@ -115,7 +118,7 @@ int main(){
     // assume the index of the player in the players array is the player id
 
     while(1){
-        rem = rd();
+        rem = rollPhysicalDie();
         printf("Press enter to roll the dice\n");
         getchar();
         printf("You got %d\n",rem);
@@ -126,10 +129,12 @@ int main(){
 
     }
     while(1){
-        rem=rd();
+        rem=rollPhysicalDie();
         printf("Press enter to roll the dice\n");
         getchar();
         printf("You got %d\n",rem);
+        movePlayer(&players[0], rem);
+        displayBoard(head);
         if (rem==6){
             printf("Yay you get another try!\n");
             continue;
@@ -141,6 +146,9 @@ int main(){
         }
         if (ch=='y'){
             fflush(stdin);
+            printf("%d\n",players[0]->data);
+            continue;
+            
         }
     }
     return 0;
