@@ -58,6 +58,36 @@ int rd(){
     } while (rem == 0);
     return rem;
 }
+//function to decide the dice played irl and enter that number
+int rollPhysicalDie() {
+    int userInput;
+    printf("Enter the number rolled on the physical die (1-6): ");
+    scanf("%d", &userInput);
+
+    // Validate the input
+    if (userInput < 1 || userInput > 6) {
+        printf("Invalid input. Please enter a number between 1 and 6.\n");
+        return rollPhysicalDie(); // Recursive call to get valid input
+    }
+
+    return userInput;
+}
+//function to create a move player function after the die is rolled
+void movePlayer(NODE** player, int steps) {
+    NODE* currentSquare = *player;
+
+    // Move the player forward by 'steps' squares
+    for (int i = 0; i < steps; i++) {
+        if (currentSquare->rlink != NULL) {
+            currentSquare = currentSquare->rlink;
+        } else {
+            // The player has reached the end of the board
+            break;
+        }
+    }
+
+    *player = currentSquare;  // Update the player's position
+}
 
 int main(){
     NODE* head = (NODE*)malloc(sizeof(NODE));
